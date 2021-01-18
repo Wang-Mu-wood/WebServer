@@ -1,0 +1,45 @@
+1:运行WebServer时控制台出现了:
+  java.lang.SecurityException:Prohibited package:java.com.webserver.core
+  原因:复制上一个版本时目录复制错了位置，将java目录复制到了新版本项目中
+  java目录里面了！
+  解决办法:删掉，重新将java目录覆盖新版本的java目录
+
+2:运行WebServer时出现了:
+  错误: 找不到或无法加载主类 WebServer
+  原因: idea没有及时编译新复制过来的WebServer类
+  解决办法:选择idea菜单栏中的Build->Rebuild Project即可
+
+3:浏览器输入地址后显示:
+  无法访问此网站。找不到xxxxxxx的服务器IP地址
+  原因:服务器URL地址拼写不对导致的
+
+4:浏览器请求后，服务端打桩之显示:一个客户端连接了
+  原因:遇到了浏览器发送的空请求问题(后面会专门处理空请求)
+  解决办法:换一个浏览器请求或清空浏览器缓存后再尝试请求。
+
+5:浏览器请求后，服务端读取到的内容是乱码
+  原因:浏览器输入URL时，前面使用的是https协议了!
+  解决办法:改成http://localhost.......
+
+6:运行WebServer类时抛出了异常:
+  java.net.BindException:Address already in use: JVM_Bind
+  原因:服务端启动过两次，很可能是上一个版本的WebServer没有关闭，而
+      又运行了新版本的WebServer导致端口8088被占用了
+  解决:将之前的WebServer关闭
+
+7:解析请求行的操作中，将请求行按照空格拆分为三部分并赋值给:method
+  uri,protocol的代码中。下面这行可能出现数组下标越界:
+  uri = data[1];
+
+  原因:客户端发送的是空请求，导致读取请求行时实际上没有内容，因此不能
+  通过空格拆分出长度为3的数组。
+  后面的版本会专门解决空请求问题。
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,21 @@
+上一个版本中我们已经在ClientHandler第一个环节:
+解析请求中完成了对客户端发送过来的请求的解析工作，并用几个不同的变量保存了请求
+中的各部分信息
+
+这个版本我们对代码进行一次重构，将解析请求的具体工作从ClientHandler拆分出去
+
+我们设计一个类:HttpRequest,用这个类的每一个实例表示客户端发送过来的一个请求
+的所有内容。将之前在ClientHandler中定义保存请求和部分信息的变量在HttpRequest
+中作为属性定义出来。
+并在构造方法中完成对请求的解析，然后将请求各部分信息保存在HTTPRequest的对应属性
+上。这样一来，每当一个客户端链接，ClientHandler只需要在解析请求的环节实例化一个
+HTTPRequest(调用它的构造方法)就可以完成解析请求的工作了。并且实例化的HTTPRequest
+的对象中用属性保存了这次客户端发送过来的请求的工作内容。
+
+实现:
+1:新建一个包:com.webserver.http
+  这个包存放所有和HTTP协议有关的类
+2:在这个包中新建一个类:HttpRequest，请求对象
+  这个类的每一个实例用于表示客户端发送过来的一个请求内容
+3:将ClientHandler解析请求的过程移动到HTTPRequest中
+4:ClientHandler第一步解析请求改为实例化HTTPRequest即可。
